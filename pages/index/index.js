@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var height;
+var weight;
 Page({
   data: {
     items: [
@@ -15,36 +16,50 @@ Page({
       { name: '3', value: '大四' }
     ],
     listData: [
-      { "project": "身高", "unit": "cm" },
-      { "project": "体重", "unit": "kg" },
-      { "project": "肺活量", "unit": "" },
-      { "project": "坐位体前屈", "unit": "cm" },
-      { "project": "跳远", "unit": "cm" },
-      { "project": "50米跑", "unit": "秒" },
-      { "project": "1000米跑", "unit": "秒" },
-      { "project": "引体向上", "unit": "个" },
+      { "id": 1,"project": "身高", "unit": "cm" },
+      { "id": 2,"project": "体重", "unit": "kg" },
+      { "id": 3,"project": "肺活量", "unit": "" },
+      { "id": 4,"project": "坐位体前屈", "unit": "cm" },
+      { "id": 5,"project": "跳远", "unit": "cm" },
+      { "id": 6,"project": "50米跑", "unit": "秒" },
+      { "id": 7,"project": "1000米跑", "unit": "秒" },
+      { "id": 8,"project": "引体向上", "unit": "个" },
     ]
   },
   //性别判定
   radioChange1: function (e) {
     console.log(e);
     app.gender = e.detail.value;
-    if (app.gender == 'boy'){
+    if (app.gender == 'boy') {
       console.log(app.gender);
       this.setData({
         'listData[6].project': "1000米跑",
         'listData[7].project': "引体向上"
       })
     } else {
-      console.log(app.gender);  
+      console.log(app.gender);
       this.setData({
-        'listData[6].project' : "800米跑",
-        'listData[7].project' : "仰卧起坐" 
+        'listData[6].project': "800米跑",
+        'listData[7].project': "仰卧起坐"
       })
     }
   },
+  //年级判断
+  radioChange2: function (e) {
+    app.grade = e.detail.value;
+    switch (app.grade) {
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+    }
+  },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
@@ -55,7 +70,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -77,12 +92,43 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  //获取输入的指标信息（男
+  getInput: function (e) {
+    console.log(e);
+    let x = e.currentTarget.dataset.name;
+    switch (x) {
+      case 1:
+        height = e.detail.value;
+        break;
+      case 2:
+        weight = e.detail.value;
+        break;
+      case 3:
+        this.dealLungCapicity (e.detail.value);
+        break;
+      case 4:
+        this.dealSitReach (e.detail.value);
+        break;
+      case 5:
+        this.dealJump (e,detail.value);
+        break;
+      case 6:
+        this.deal50 (e.detail.value);
+        break;
+      case 7:
+        this.deal1000 (e.detail.value);
+        break;
+      case 8:
+        this.dealUp (e.detail.value);
+        break;
+    }
   }
 })

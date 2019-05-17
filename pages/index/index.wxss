@@ -1,18 +1,17 @@
 /**index.wxss**/
 .top{
+  background-color: lightblue;
   display: flex;
   flex-direction: row;
   height: 75px;
   text-align: center;
+  align-items: center;
 }
-.left{
-  background-color: lightblue;
+
+.block{
   width: 50%;
 }
-.right{
-  background-color: lightgoldenrodyellow;
-  width: 50%;
-}
+
 .table{
   display: flex;
   flex-direction: row;
