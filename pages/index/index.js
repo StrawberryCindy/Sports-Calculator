@@ -3,7 +3,7 @@
 const app = getApp()
 var height
 var weight
-var bmiBack //bmi指数，用于后台计算
+var bmiBack = 0 //bmi指数，用于后台计算
 //以下为每项成绩
 var bmiMark = 0, lungMark = 0, sitReachMark = 0, jumpMark = 0, shortRunMark = 0, longRunMark = 0, upMark = 0
 Page({
@@ -163,9 +163,17 @@ Page({
   //开始处理数据...
   dealBMIGirl: function () {
     if ( height&&weight ) {
+      //输入两个0会出现NaN...咦我明明判断了呀
+      console.log(height,weight)
       bmiBack = (weight / Math.pow(height / 100, 2)).toFixed(1);
       this.setData({
         bmi : bmiBack
+      })
+    } else {
+      bmiMark = 0
+      this.setData({
+        bmi: bmiBack,
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
       })
     }
     if (bmiBack <= 17.1) {
