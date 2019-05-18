@@ -1,10 +1,16 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var height;
-var weight;
+var height
+var weight
+var bmiBack //bmi指数，用于后台计算
+//以下为每项成绩
+var bmiMark = 0, lungMark = 0, sitReachMark = 0, jumpMark = 0, shortRunMark = 0, longRunMark = 0, upMark = 0
 Page({
   data: {
+    bmi:['0'],
+    bmiC:['低体重'],
+    mark:['0'],
     items: [
       { name: 'boy', value: '男' },
       { name: 'girl', value: '女' }
@@ -30,33 +36,23 @@ Page({
   radioChange1: function (e) {
     console.log(e);
     app.gender = e.detail.value;
-    if (app.gender == 'boy') {
-      console.log(app.gender);
-      this.setData({
-        'listData[6].project': "1000米跑",
-        'listData[7].project': "引体向上"
-      })
-    } else {
+    if (app.gender == 'girl') {
       console.log(app.gender);
       this.setData({
         'listData[6].project': "800米跑",
         'listData[7].project': "仰卧起坐"
       })
+    } else {
+      console.log(app.gender);
+      this.setData({
+        'listData[6].project': "1000米跑",
+        'listData[7].project': "引体向上"
+      })
     }
   },
-  //年级判断
+  //获取年级
   radioChange2: function (e) {
     app.grade = e.detail.value;
-    switch (app.grade) {
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-    }
   },
   //事件处理函数
   bindViewTap: function () {
@@ -100,34 +96,146 @@ Page({
       hasUserInfo: true
     })
   },
-  //获取输入的指标信息（男
+  //获取输入的指标信息
   getInput: function (e) {
     console.log(e);
     let x = e.currentTarget.dataset.name;
-    switch (x) {
+    if (app.gender == 'girl') {
+      switch (x) {
+        case 1:
+          height = e.detail.value;
+          this.dealBMIGirl ();
+          break;
+        case 2:
+          weight = e.detail.value;
+          this.dealBMIGirl ();
+          break;
+        case 3:
+          this.dealLungCapicityGirl (e.detail.value);
+          break;
+        case 4:
+          this.dealSitReachGirl (e.detail.value);
+          break;
+        case 5:
+          this.dealJumpGirl (e, detail.value);
+          break;
+        case 6:
+          this.deal50Girl (e.detail.value);
+          break;
+        case 7:
+          this.deal800 (e.detail.value);
+          break;
+        case 8:
+          this.dealSitUp (e.detail.value);
+          break;
+      }
+    } else {
+      switch (x) {
+        case 1:
+          height = e.detail.value;
+          this.dealBMIBoy ();
+          break;
+        case 2:
+          weight = e.detail.value;
+          this.dealBMIBoy ();
+          break;
+        case 3:
+          this.dealLungCapicityBoy (e.detail.value);
+          break;
+        case 4:
+          this.dealSitReachBoy (e.detail.value);
+          break;
+        case 5:
+          this.dealJumpBoy (e,detail.value);
+          break;
+        case 6:
+          this.deal50Boy (e.detail.value);
+          break;
+        case 7:
+          this.deal1000 (e.detail.value);
+          break;
+        case 8:
+          this.dealPullUp (e.detail.value);
+          break;
+      }
+    }
+  },
+  //开始处理数据...
+  dealBMIGirl: function () {
+    if ( height&&weight ) {
+      bmiBack = (weight / Math.pow(height / 100, 2)).toFixed(1);
+      this.setData({
+        bmi : bmiBack
+      })
+    }
+    if (bmiBack <= 17.1) {
+      bmiMark = 80 * 0.15
+      this.setData({
+        mark : bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC : '低体重'
+      })
+    } else if (bmiBack > 17.1 && bmiBack <= 23.9) {
+      bmiMark = 100 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '正常'
+      })
+    } else if (bmiBack > 23.9 && bmiBack <= 27.9) {
+      bmiMark = 80 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '超重'
+      })
+    } else if (bmiBack > 27.9) {
+      bmiMark = 60 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '肥胖'
+      })
+    }
+  },
+  dealBMIBoy: function () {
+    if (height && weight) {
+      bmiBack = (weight / Math.pow(height / 100, 2)).toFixed(1);
+      this.setData({
+        bmi: bmiBack
+      })
+    }
+    if (bmiBack <= 17.8) {
+      bmiMark = 80 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '低体重'
+      })
+    } else if (bmiBack > 17.8 && bmiBack <= 23.9) {
+      bmiMark = 100 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '正常'
+      })
+    } else if (bmiBack > 23.9 && bmiBack <= 27.9) {
+      bmiMark = 80 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '超重'
+      })
+    } else if (bmiBack > 27.9) {
+      bmiMark = 60 * 0.15
+      this.setData({
+        mark: bmiMark + lungMark + sitReachMark + jumpMark + shortRunMark + longRunMark + upMark,
+        bmiC: '肥胖'
+      })
+    }
+  }, 
+  dealLungCapicityGirl: function (n) {
+    switch (app.grade) {
       case 1:
-        height = e.detail.value;
         break;
       case 2:
-        weight = e.detail.value;
         break;
       case 3:
-        this.dealLungCapicity (e.detail.value);
         break;
       case 4:
-        this.dealSitReach (e.detail.value);
-        break;
-      case 5:
-        this.dealJump (e,detail.value);
-        break;
-      case 6:
-        this.deal50 (e.detail.value);
-        break;
-      case 7:
-        this.deal1000 (e.detail.value);
-        break;
-      case 8:
-        this.dealUp (e.detail.value);
         break;
     }
   }

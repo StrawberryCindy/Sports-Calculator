@@ -1,8 +1,11 @@
 <!--index.wxml-->
 <view class="container">
   <view class="top">
-    <view class="block">身体质量指数：{{BMI}}</view>
-    <view class="block">总成绩：{{mark}}</view>
+    <view class="block">身体质量指数：
+      <text>{{bmi}}</text>
+      <text class='small'>{{bmiC}}</text>
+    </view>
+    <view class="block">总成绩：<text>{{mark}}</text></view>
   </view> 
   <view class='table'>
     <text>性别：</text>
