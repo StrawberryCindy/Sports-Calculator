@@ -48,11 +48,10 @@ function dealBMI () {
 //返回与BMI有关的中文和成绩
 function dealBMIMarkG (bmi) {
   console.log(bmi);
-  if (bmi == 0) return [0.0, '低体重'];
+  if (bmi == 0) return [0, '低体重'];
   var bmiMark = 0
   var bmiC = '低体重';
   if (bmi <= 17.1) {
-    console.log('hahh')
     bmiMark = 80 * 0.15
     bmiC = '低体重'
   } else if (bmi > 17.1 && bmi <= 23.9) {
@@ -613,17 +612,291 @@ function deal50B (n) {
 }
 //返回男生1000m成绩
 function deal1000 (n) {
-
+  var longRunMark;
+  switch (app.grade) {
+    case 1:
+    case 2:
+      if (n > 372) longRunMark = 0;
+      else if (n <= 372 && n > 352) longRunMark = 10 * 0.2
+      else if (n <= 352 && n > 332) longRunMark = 20 * 0.2
+      else if (n <= 332 && n > 312) longRunMark = 30 * 0.2
+      else if (n <= 312 && n > 292) longRunMark = 40 * 0.2
+      else if (n <= 292 && n > 272) longRunMark = 50 * 0.2
+      else if (n <= 272 && n > 267) longRunMark = 60 * 0.2
+      else if (n <= 267 && n > 262) longRunMark = 62 * 0.2
+      else if (n <= 262 && n > 257) longRunMark = 64 * 0.2
+      else if (n <= 257 && n > 252) longRunMark = 66 * 0.2
+      else if (n <= 252 && n > 247) longRunMark = 68 * 0.2
+      else if (n <= 247 && n > 242) longRunMark = 70 * 0.2
+      else if (n <= 242 && n > 237) longRunMark = 72 * 0.2
+      else if (n <= 237 && n > 232) longRunMark = 74 * 0.2
+      else if (n <= 232 && n > 227) longRunMark = 76 * 0.2
+      else if (n <= 227 && n > 222) longRunMark = 78 * 0.2
+      else if (n <= 222 && n > 214) longRunMark = 80 * 0.2
+      else if (n <= 214 && n > 207) longRunMark = 85 * 0.2
+      else if (n <= 207 && n > 202) longRunMark = 90 * 0.2
+      else if (n <= 202 && n > 197) longRunMark = 95 * 0.2
+      else if (n <= 197 && n > 193) longRunMark = 100 * 0.2
+      else if (n <= 193 && n > 189) longRunMark = 100 * 0.2 + 1
+      else if (n <= 189 && n > 185) longRunMark = 100 * 0.2 + 2
+      else if (n <= 185 && n > 181) longRunMark = 100 * 0.2 + 3
+      else if (n <= 181 && n > 177) longRunMark = 100 * 0.2 + 4
+      else if (n <= 177 && n > 174) longRunMark = 100 * 0.2 + 5
+      else if (n <= 174 && n > 171) longRunMark = 100 * 0.2 + 6
+      else if (n <= 171 && n > 168) longRunMark = 100 * 0.2 + 7
+      else if (n <= 168 && n > 165) longRunMark = 100 * 0.2 + 8
+      else if (n <= 165 && n > 162) longRunMark = 100 * 0.2 + 9
+      else if (n <= 162 ) longRunMark = 100 * 0.2 + 10
+      break;
+    case 3:
+    case 4:
+      if (n > 370) longRunMark = 0;
+      else if (n <= 370 && n > 350) longRunMark = 10 * 0.2
+      else if (n <= 350 && n > 330) longRunMark = 20 * 0.2
+      else if (n <= 330 && n > 310) longRunMark = 30 * 0.2
+      else if (n <= 310 && n > 290) longRunMark = 40 * 0.2
+      else if (n <= 290 && n > 270) longRunMark = 50 * 0.2
+      else if (n <= 270 && n > 265) longRunMark = 60 * 0.2
+      else if (n <= 265 && n > 260) longRunMark = 62 * 0.2
+      else if (n <= 260 && n > 255) longRunMark = 64 * 0.2
+      else if (n <= 255 && n > 250) longRunMark = 66 * 0.2
+      else if (n <= 250 && n > 245) longRunMark = 68 * 0.2
+      else if (n <= 245 && n > 240) longRunMark = 70 * 0.2
+      else if (n <= 240 && n > 235) longRunMark = 72 * 0.2
+      else if (n <= 235 && n > 230) longRunMark = 74 * 0.2
+      else if (n <= 230 && n > 225) longRunMark = 76 * 0.2
+      else if (n <= 225 && n > 220) longRunMark = 78 * 0.2
+      else if (n <= 220 && n > 212) longRunMark = 80 * 0.2
+      else if (n <= 212 && n > 205) longRunMark = 85 * 0.2
+      else if (n <= 205 && n > 200) longRunMark = 90 * 0.2
+      else if (n <= 200 && n > 195) longRunMark = 95 * 0.2
+      else if (n <= 195 && n > 191) longRunMark = 100 * 0.2
+      else if (n <= 191 && n > 187) longRunMark = 100 * 0.2 + 1
+      else if (n <= 187 && n > 183) longRunMark = 100 * 0.2 + 2
+      else if (n <= 183 && n > 179) longRunMark = 100 * 0.2 + 3
+      else if (n <= 179 && n > 175) longRunMark = 100 * 0.2 + 4
+      else if (n <= 175 && n > 172) longRunMark = 100 * 0.2 + 5
+      else if (n <= 172 && n > 169) longRunMark = 100 * 0.2 + 6
+      else if (n <= 169 && n > 166) longRunMark = 100 * 0.2 + 7
+      else if (n <= 166 && n > 163) longRunMark = 100 * 0.2 + 8
+      else if (n <= 163 && n > 161) longRunMark = 100 * 0.2 + 9
+      else if (n <= 161) longRunMark = 100 * 0.2 + 10
+      break; 
+  }
+  return longRunMark;
 }
 //返回女生800m成绩
 function deal800 (n) {
-
+  var longRunMark;
+  switch (app.grade) {
+    case 1:
+    case 2:
+      if (n > 324) longRunMark = 0;
+      else if (n <= 324 && n > 314) longRunMark = 10 * 0.2
+      else if (n <= 314 && n > 304) longRunMark = 20 * 0.2
+      else if (n <= 304 && n > 294) longRunMark = 30 * 0.2
+      else if (n <= 294 && n > 284) longRunMark = 40 * 0.2
+      else if (n <= 284 && n > 274) longRunMark = 50 * 0.2
+      else if (n <= 274 && n > 269) longRunMark = 60 * 0.2
+      else if (n <= 269 && n > 264) longRunMark = 62 * 0.2
+      else if (n <= 264 && n > 259) longRunMark = 64 * 0.2
+      else if (n <= 259 && n > 254) longRunMark = 66 * 0.2
+      else if (n <= 254 && n > 249) longRunMark = 68 * 0.2
+      else if (n <= 249 && n > 244) longRunMark = 70 * 0.2
+      else if (n <= 244 && n > 239) longRunMark = 72 * 0.2
+      else if (n <= 239 && n > 234) longRunMark = 74 * 0.2
+      else if (n <= 234 && n > 229) longRunMark = 76 * 0.2
+      else if (n <= 229 && n > 224) longRunMark = 78 * 0.2
+      else if (n <= 224 && n > 217) longRunMark = 80 * 0.2
+      else if (n <= 217 && n > 210) longRunMark = 85 * 0.2
+      else if (n <= 210 && n > 204) longRunMark = 90 * 0.2
+      else if (n <= 204 && n > 198) longRunMark = 95 * 0.2
+      else if (n <= 198 && n > 193) longRunMark = 100 * 0.2
+      else if (n <= 193 && n > 188) longRunMark = 100 * 0.2 + 1
+      else if (n <= 188 && n > 183) longRunMark = 100 * 0.2 + 2
+      else if (n <= 183 && n > 178) longRunMark = 100 * 0.2 + 3
+      else if (n <= 178 && n > 173) longRunMark = 100 * 0.2 + 4
+      else if (n <= 173 && n > 168) longRunMark = 100 * 0.2 + 5
+      else if (n <= 168 && n > 163) longRunMark = 100 * 0.2 + 6
+      else if (n <= 163 && n > 158) longRunMark = 100 * 0.2 + 7
+      else if (n <= 158 && n > 153) longRunMark = 100 * 0.2 + 8
+      else if (n <= 153 && n > 148) longRunMark = 100 * 0.2 + 9
+      else if (n <= 148) longRunMark = 100 * 0.2 + 10
+      break;
+    case 3:
+    case 4:
+      if (n > 322) longRunMark = 0;
+      else if (n <= 322 && n > 312) longRunMark = 10 * 0.2
+      else if (n <= 312 && n > 302) longRunMark = 20 * 0.2
+      else if (n <= 302 && n > 292) longRunMark = 30 * 0.2
+      else if (n <= 292 && n > 282) longRunMark = 40 * 0.2
+      else if (n <= 282 && n > 272) longRunMark = 50 * 0.2
+      else if (n <= 272 && n > 267) longRunMark = 60 * 0.2
+      else if (n <= 267 && n > 262) longRunMark = 62 * 0.2
+      else if (n <= 262 && n > 257) longRunMark = 64 * 0.2
+      else if (n <= 257 && n > 252) longRunMark = 66 * 0.2
+      else if (n <= 252 && n > 247) longRunMark = 68 * 0.2
+      else if (n <= 247 && n > 242) longRunMark = 70 * 0.2
+      else if (n <= 242 && n > 237) longRunMark = 72 * 0.2
+      else if (n <= 237 && n > 232) longRunMark = 74 * 0.2
+      else if (n <= 232 && n > 227) longRunMark = 76 * 0.2
+      else if (n <= 227 && n > 222) longRunMark = 78 * 0.2
+      else if (n <= 222 && n > 215) longRunMark = 80 * 0.2
+      else if (n <= 215 && n > 208) longRunMark = 85 * 0.2
+      else if (n <= 208 && n > 202) longRunMark = 90 * 0.2
+      else if (n <= 202 && n > 196) longRunMark = 95 * 0.2
+      else if (n <= 196 && n > 191) longRunMark = 100 * 0.2
+      else if (n <= 191 && n > 186) longRunMark = 100 * 0.2 + 1
+      else if (n <= 186 && n > 181) longRunMark = 100 * 0.2 + 2
+      else if (n <= 181 && n > 176) longRunMark = 100 * 0.2 + 3
+      else if (n <= 176 && n > 171) longRunMark = 100 * 0.2 + 4
+      else if (n <= 171 && n > 166) longRunMark = 100 * 0.2 + 5
+      else if (n <= 166 && n > 161) longRunMark = 100 * 0.2 + 6
+      else if (n <= 161 && n > 156) longRunMark = 100 * 0.2 + 7
+      else if (n <= 156 && n > 151) longRunMark = 100 * 0.2 + 8
+      else if (n <= 151 && n > 146) longRunMark = 100 * 0.2 + 9
+      else if (n <= 146) longRunMark = 100 * 0.2 + 10
+      break;
+  }
+  return longRunMark;
 }
 //返回引体向上成绩
 function dealPullUp (n) {
-
+  var upMark;
+  switch (app.grade) {
+    case 1:
+    case 2:
+      if (n < 5) upMark = 0;
+      else if (n >= 5 && n < 6) upMark = 10 * 0.1;
+      else if (n >= 6 && n < 7) upMark = 20 * 0.1;
+      else if (n >= 7 && n < 8) upMark = 30 * 0.1;
+      else if (n >= 8 && n < 9) upMark = 40 * 0.1;
+      else if (n >= 9 && n < 10) upMark = 50 * 0.1;
+      else if (n >= 10 && n < 11) upMark = 60 * 0.1;
+      else if (n >= 11 && n < 12) upMark = 64 * 0.1; 
+      else if (n >= 12 && n < 13) upMark = 68 * 0.1;
+      else if (n >= 13 && n < 14) upMark = 72 * 0.1;
+      else if (n >= 14 && n < 15) upMark = 76 * 0.1;
+      else if (n >= 15 && n < 16) upMark = 80 * 0.1;
+      else if (n >= 16 && n < 17) upMark = 85 * 0.1;
+      else if (n >= 17 && n < 18) upMark = 90 * 0.1;
+      else if (n >= 18 && n < 19) upMark = 95 * 0.1;
+      else if (n >= 19 && n < 20) upMark = 100 * 0.1;
+      else if (n >= 20 && n < 21) upMark = 10 + 1;
+      else if (n >= 21 && n < 22) upMark = 10 + 2;
+      else if (n >= 22 && n < 23) upMark = 10 + 3;
+      else if (n >= 23 && n < 24) upMark = 10 + 4;
+      else if (n >= 24 && n < 25) upMark = 10 + 5;
+      else if (n >= 25 && n < 26) upMark = 10 + 6;
+      else if (n >= 26 && n < 27) upMark = 10 + 7;
+      else if (n >= 27 && n < 28) upMark = 10 + 8;
+      else if (n >= 28 && n < 29) upMark = 10 + 9;
+      else if (n >= 29) upMark = 10 + 10;
+      break;
+    case 3:
+    case 4:
+      if (n < 6) upMark = 0;
+      else if (n >= 6 && n < 7) upMark = 10 * 0.1;
+      else if (n >= 7 && n < 8) upMark = 20 * 0.1;
+      else if (n >= 8 && n < 9) upMark = 30 * 0.1;
+      else if (n >= 9 && n < 10) upMark = 40 * 0.1;
+      else if (n >= 10 && n < 11) upMark = 50 * 0.1;
+      else if (n >= 11 && n < 12) upMark = 60 * 0.1;
+      else if (n >= 12 && n < 13) upMark = 64 * 0.1;
+      else if (n >= 13 && n < 14) upMark = 68 * 0.1;
+      else if (n >= 14 && n < 15) upMark = 72 * 0.1;
+      else if (n >= 15 && n < 16) upMark = 76 * 0.1;
+      else if (n >= 16 && n < 17) upMark = 80 * 0.1;
+      else if (n >= 17 && n < 18) upMark = 85 * 0.1;
+      else if (n >= 18 && n < 19) upMark = 90 * 0.1;
+      else if (n >= 19 && n < 20) upMark = 95 * 0.1;
+      else if (n >= 20 && n < 21) upMark = 100 * 0.1;
+      else if (n >= 21 && n < 22) upMark = 10 + 1;
+      else if (n >= 22 && n < 23) upMark = 10 + 2;
+      else if (n >= 23 && n < 24) upMark = 10 + 3;
+      else if (n >= 24 && n < 25) upMark = 10 + 4;
+      else if (n >= 25 && n < 26) upMark = 10 + 5;
+      else if (n >= 26 && n < 27) upMark = 10 + 6;
+      else if (n >= 27 && n < 28) upMark = 10 + 7;
+      else if (n >= 28 && n < 29) upMark = 10 + 8;
+      else if (n >= 29 && n < 30) upMark = 10 + 9;
+      else if (n >= 30) upMark = 10 + 10;
+      break;
+  }
+  return upMark;
 }
 //返回仰卧起坐成绩
 function dealSitUp (n) {
-
+  var upMark;
+  switch (app.grade) {
+    case 1:
+    case 2:
+      if (n < 16) upMark = 0;
+      else if (n >= 16 && n < 18) upMark = 10 * 0.1;
+      else if (n >= 18 && n < 20) upMark = 20 * 0.1;
+      else if (n >= 20 && n < 22) upMark = 30 * 0.1;
+      else if (n >= 22 && n < 24) upMark = 40 * 0.1;
+      else if (n >= 24 && n < 26) upMark = 50 * 0.1;
+      else if (n >= 26 && n < 28) upMark = 60 * 0.1;
+      else if (n >= 28 && n < 30) upMark = 62 * 0.1;
+      else if (n >= 30 && n < 32) upMark = 64 * 0.1;
+      else if (n >= 32 && n < 34) upMark = 66 * 0.1;
+      else if (n >= 34 && n < 36) upMark = 68 * 0.1;
+      else if (n >= 36 && n < 38) upMark = 70 * 0.1;
+      else if (n >= 38 && n < 40) upMark = 72 * 0.1;
+      else if (n >= 40 && n < 42) upMark = 74 * 0.1;
+      else if (n >= 42 && n < 44) upMark = 76 * 0.1;
+      else if (n >= 44 && n < 46) upMark = 78 * 0.1;
+      else if (n >= 46 && n < 49) upMark = 80 * 0.1;
+      else if (n >= 49 && n < 52) upMark = 85 * 0.1;
+      else if (n >= 52 && n < 54) upMark = 90 * 0.1;
+      else if (n >= 54 && n < 56) upMark = 95 * 0.1;
+      else if (n >= 56 && n < 58) upMark = 100 * 0.1;
+      else if (n >= 58 && n < 60) upMark = 10 + 1;
+      else if (n >= 60 && n < 62) upMark = 10 + 2;
+      else if (n >= 62 && n < 63) upMark = 10 + 3;
+      else if (n >= 63 && n < 64) upMark = 10 + 4;
+      else if (n >= 64 && n < 65) upMark = 10 + 5;
+      else if (n >= 65 && n < 66) upMark = 10 + 6;
+      else if (n >= 66 && n < 67) upMark = 10 + 7;
+      else if (n >= 67 && n < 68) upMark = 10 + 8;
+      else if (n >= 68 && n < 69) upMark = 10 + 9;
+      else if (n >= 69) upMark = 10 + 10;
+      break;
+    case 3:
+    case 4:
+      if (n < 17) upMark = 0;
+      else if (n >= 17 && n < 19) upMark = 10 * 0.1;
+      else if (n >= 19 && n < 21) upMark = 20 * 0.1;
+      else if (n >= 21 && n < 23) upMark = 30 * 0.1;
+      else if (n >= 23 && n < 25) upMark = 40 * 0.1;
+      else if (n >= 25 && n < 27) upMark = 50 * 0.1;
+      else if (n >= 27 && n < 29) upMark = 60 * 0.1;
+      else if (n >= 29 && n < 31) upMark = 62 * 0.1;
+      else if (n >= 31 && n < 33) upMark = 64 * 0.1;
+      else if (n >= 33 && n < 35) upMark = 66 * 0.1;
+      else if (n >= 35 && n < 37) upMark = 68 * 0.1;
+      else if (n >= 37 && n < 39) upMark = 70 * 0.1;
+      else if (n >= 39 && n < 41) upMark = 72 * 0.1;
+      else if (n >= 41 && n < 43) upMark = 74 * 0.1;
+      else if (n >= 43 && n < 45) upMark = 76 * 0.1;
+      else if (n >= 45 && n < 47) upMark = 78 * 0.1;
+      else if (n >= 47 && n < 50) upMark = 80 * 0.1;
+      else if (n >= 50 && n < 53) upMark = 85 * 0.1;
+      else if (n >= 53 && n < 55) upMark = 90 * 0.1;
+      else if (n >= 55 && n < 57) upMark = 95 * 0.1;
+      else if (n >= 57 && n < 59) upMark = 100 * 0.1;
+      else if (n >= 59 && n < 61) upMark = 10 + 1;
+      else if (n >= 61 && n < 63) upMark = 10 + 2;
+      else if (n >= 63 && n < 64) upMark = 10 + 3;
+      else if (n >= 64 && n < 65) upMark = 10 + 4;
+      else if (n >= 65 && n < 66) upMark = 10 + 5;
+      else if (n >= 66 && n < 67) upMark = 10 + 6;
+      else if (n >= 67 && n < 68) upMark = 10 + 7;
+      else if (n >= 68 && n < 69) upMark = 10 + 8;
+      else if (n >= 69 && n < 70) upMark = 10 + 9;
+      else if (n >= 70) upMark = 10 + 10;
+      break;
+  }
+  return upMark;
 }
