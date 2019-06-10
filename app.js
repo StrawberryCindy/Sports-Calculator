@@ -1,8 +1,8 @@
 //app.js
 App({
   onLaunch: function () {
-    var gender;
-    var grade;
+    var gender = 'boy'
+    var grade = 1
     var height = 0, weight = 0
 
     // 展示本地存储能力

@@ -38,6 +38,8 @@ module.exports = {
 //计算BMI
 function dealBMI () {
   var bmi = 0
+  app.height = 0
+  app.weight = 0
   console.log(app.height, typeof app.weight)
   if (app.height && app.weight) {
     console.log(app.height, app.weight)
@@ -67,6 +69,7 @@ function dealBMIMarkG (bmi) {
   return [bmiMark, bmiC]
 }
 function dealBMIMarkB (bmi) {
+  if (bmi == 0) return [0, '低体重'];
   var bmiMark = 0
   var bmiC = '低体重';
   if (bmi <= 17.8) {
@@ -503,6 +506,7 @@ function dealJumpB (n) {
 }
 //返回短跑成绩
 function deal50G (n) {
+  if (n == 0) return 0;
   var shortRunMark = 0;
   switch (app.grade) {
     case 1:
@@ -557,6 +561,7 @@ function deal50G (n) {
   return shortRunMark;
 }
 function deal50B (n) {
+  if (n == 0) return 0;
   var shortRunMark = 0;
   switch (app.grade) {
     case 1:
@@ -611,8 +616,10 @@ function deal50B (n) {
   return shortRunMark;
 }
 //返回男生1000m成绩
-function deal1000 (n) {
+function deal1000 (m,s) {
   var longRunMark;
+  var n = m * 60 + s;
+  if (n == 0) return 0;
   switch (app.grade) {
     case 1:
     case 2:
@@ -686,8 +693,10 @@ function deal1000 (n) {
   return longRunMark;
 }
 //返回女生800m成绩
-function deal800 (n) {
+function deal800 (m,s) {
   var longRunMark;
+  var n = m * 60 + s;
+  if (n == 0) return 0;
   switch (app.grade) {
     case 1:
     case 2:
@@ -762,6 +771,7 @@ function deal800 (n) {
 }
 //返回引体向上成绩
 function dealPullUp (n) {
+  if (n == 0) return 0;
   var upMark;
   switch (app.grade) {
     case 1:
@@ -827,6 +837,7 @@ function dealPullUp (n) {
 }
 //返回仰卧起坐成绩
 function dealSitUp (n) {
+  if(n == 0) return 0;
   var upMark;
   switch (app.grade) {
     case 1:

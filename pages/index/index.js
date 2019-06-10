@@ -2,8 +2,10 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
-var bmi, bmiC
-var bmiMark = 0, lungMark = 0, reachMark = 0, jumpMark = 0, shortRunMark = 0, longRunMark = 0, upMark = 0;
+var bmi = 0, bmiC = 0
+var bmiMark = 0, lungMark = 0, reachMark = 0, jumpMark = 0, shortRunMark = 0, longRunMark = 0, upMark = 0
+var longRunMinute = 0, longRunSecond = 0
+var lungVolume = 0, reachPosition = -20, jump = 0, shortRun = 0, up = 0 
 
 Page({
   data: {
@@ -11,27 +13,27 @@ Page({
     bmiC:['低体重'],
     mark:['0.0'],
     items: [
-      { name: 'boy', value: '男' },
+      { name: 'boy', value: '男', checked:"true"},
       { name: 'girl', value: '女' }
     ],
     items2: [
-      { name: '1', value: '大一' },
+      { name: '1', value: '大一', checked: "true" },
       { name: '2', value: '大二' },
       { name: '3', value: '大三' },
       { name: '4', value: '大四' }
     ],
     listData: [
-      { "id": 1,"project": "身高", "unit": "cm" },
-      { "id": 2,"project": "体重", "unit": "kg" },
-      { "id": 3,"project": "肺活量", "unit": "" },
-      { "id": 4,"project": "坐位体前屈", "unit": "cm" },
-      { "id": 5,"project": "跳远", "unit": "cm" },
-      { "id": 6,"project": "50米跑", "unit": "秒" },
-      { "id": 7,"project": "1000米跑", "unit": "秒" },
-      { "id": 8,"project": "引体向上", "unit": "个" },
+      { "id": 1, "project": "身高", "unit": "cm" },
+      { "id": 2, "project": "体重", "unit": "kg" },
+      { "id": 3, "project": "肺活量", "unit": "" },
+      { "id": 4, "project": "坐位体前屈", "unit": "cm" },
+      { "id": 5, "project": "跳远", "unit": "cm" },
+      { "id": 6, "project": "50米跑", "unit": "秒" },
+      { "id1": 7, "id2":8, "project": "1000米跑", "unit1": "分","unit2":"秒" },
+      { "id": 9, "project": "引体向上", "unit": "个" },
     ]
   },
-  //性别判定
+  //性别判定 重新计算
   radioChange1: function (e) {
     console.log(e);
     app.gender = e.detail.value;
@@ -40,16 +42,67 @@ Page({
         'listData[6].project': "800米跑",
         'listData[7].project': "仰卧起坐"
       })
+      bmi = util.dealBMI()
+      bmiMark = util.dealBMIMarkG(bmi)[0]
+      bmiC = util.dealBMIMarkG(bmi)[1]
+      lungMark = util.dealLungCapicityG(lungVolume);
+      reachMark = util.dealSitReachG(reachPosition);
+      jumpMark = util.dealJumpG(jump);
+      shortRunMark = util.deal50G(shortRun);
+      longRunMark = util.deal800(longRunMinute, longRunSecond);
+      upMark = util.dealSitUp(up);
     } else {
       this.setData({
         'listData[6].project': "1000米跑",
         'listData[7].project': "引体向上"
       })
+      bmi = util.dealBMI()
+      bmiMark = util.dealBMIMarkB(bmi)[0]
+      bmiC = util.dealBMIMarkB(bmi)[1]
+      lungMark = util.dealLungCapicityB(lungVolume);
+      reachMark = util.dealSitReachB(reachPosition);
+      jumpMark = util.dealJumpB(jump);
+      shortRunMark = util.deal50B(shortRun);
+      longRunMark = util.deal1000(longRunMinute, longRunSecond);
+      upMark = util.dealPullUp(up);
+      console.log(bmi, bmiMark, bmiC, lungMark, reachMark, jumpMark, shortRunMark, longRunMark, upMark)
     }
+    this.setData({
+      bmi: bmi,
+      bmiC: bmiC,
+      mark: (bmiMark + lungMark + reachMark + jumpMark + shortRunMark + longRunMark + upMark).toFixed(1)
+    })
   },
-  //获取年级
+  //获取年级 重新计算
   radioChange2: function (e) {
     app.grade = parseInt(e.detail.value);
+    if (app.gender == 'girl') {
+      bmi = util.dealBMI()
+      util.dealBMIMarkG(bmi)[0]
+      bmiC = util.dealBMIMarkG(bmi)[1]
+      lungMark = util.dealLungCapicityG(lungVolume);
+      reachMark = util.dealSitReachG(reachPosition);
+      jumpMark = util.dealJumpG(jump);
+      shortRunMark = util.deal50G(shortRun);
+      longRunMark = util.deal800(longRunMinute, longRunSecond);
+      upMark = util.dealSitUp(up);
+    } else {
+      bmi = util.dealBMI()
+      bmiMark = util.dealBMIMarkB(bmi)[0]
+      bmiC = util.dealBMIMarkB(bmi)[1]
+      lungMark = util.dealLungCapicityB(lungVolume);
+      reachMark = util.dealSitReachB(reachPosition);
+      jumpMark = util.dealJumpB(jump);
+      shortRunMark = util.deal50B(shortRun);
+      longRunMark = util.deal1000(longRunMinute, longRunSecond);
+      upMark = util.dealPullUp(up);
+      console.log(bmi, bmiMark, bmiC, lungMark, reachMark, jumpMark, shortRunMark, longRunMark, upMark)
+    }
+    this.setData({
+      bmi: bmi,
+      bmiC: bmiC,
+      mark: (bmiMark + lungMark + reachMark + jumpMark + shortRunMark + longRunMark + upMark).toFixed(1)
+    })
   },
   //事件处理函数(原程序自带)
   bindViewTap: function () {
@@ -113,22 +166,32 @@ Page({
           bmiC = util.dealBMIMarkG (bmi)[1]
           break;
         case 3:
-          lungMark = util.dealLungCapicityG (parseInt(e.detail.value));
+          lungVolume = parseInt(e.detail.value);
+          lungMark = util.dealLungCapicityG (lungVolume);
           break;
         case 4:
-          reachMark = util.dealSitReachG (parseInt(e.detail.value));
+          reachPosition = parseInt(e.detail.value);
+          reachMark = util.dealSitReachG (reachPosition);
           break;
         case 5:
-          jumpMark = util.dealJumpG (parseInt(e.detail.value));
+          jump = parseInt(e.detail.value);
+          jumpMark = util.dealJumpG (jump);
           break;
         case 6:
-          shortRunMark = util.deal50G (parseInt(e.detail.value));
+          shortRun = parseInt(e.detail.value);
+          shortRunMark = util.deal50G (shortRun);
           break;
         case 7:
-          longRunMark = util.deal800(parseInt(e.detail.value));
+          longRunMarkMinute = parseInt(e.detail.value);
+          longRunMark = util.deal800(longRunMinute, longRunSecond);
           break;
         case 8:
-          upMark = util.dealSitUp(parseInt(e.detail.value));
+          longRunMarkSecond = parseInt(e.detail.value);
+          longRunMark = util.deal800(longRunMinute, longRunSecond);
+          break;
+        case 9:
+          up = parseInt(e.detail.value);
+          upMark = util.dealSitUp(up);
           break;
       }
     } else {
@@ -146,22 +209,31 @@ Page({
           bmiC = util.dealBMIMarkB (bmi)[1]
           break;
         case 3:
-          lungMark = util.dealLungCapicityB(parseInt(e.detail.value));
+          lungVolume = parseInt(e.detail.value);
+          lungMark = util.dealLungCapicityB(lungVolume);
           break;
         case 4:
-          reachMark = util.dealSitReachB(parseInt(e.detail.value));
+          reachPosition = parseInt(e.detail.value);
+          reachMark = util.dealSitReachB(reachPosition);
           break;
         case 5:
-          jumpMark = util.dealJumpB(parseInt(e.detail.value));
+          jump = parseInt(e.detail.value);
+          jumpMark = util.dealJumpB(jump);
           break;
         case 6:
-          shortRunMark = util.deal50B(parseInt(e.detail.value));
+          shortRun = parseInt(e.detail.value);
+          shortRunMark = util.deal50B(shortRun);
           break;
         case 7:
-          longRunMark = util.deal1000(parseInt(e.detail.value));
-          break;
+          longRunMarkMinute = parseInt(e.detail.value);
+          longRunMark = util.deal1000(longRunMinute, longRunSecond);
         case 8:
-          upMark = util.dealPullUp(parseInt(e.detail.value));
+          longRunMarkSecond = parseInt(e.detail.value);
+          longRunMark = util.deal1000(longRunMinute, longRunSecond);
+          break;
+        case 9:
+          up = parseInt(e.detail.value);
+          upMark = util.dealPullUp(up);
           break;
       }
     }

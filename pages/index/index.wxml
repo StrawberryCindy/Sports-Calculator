@@ -5,13 +5,15 @@
       <text class='large' style='margin-bottom: -15px'>{{bmi}}</text>
       <text class='small'>{{bmiC}}</text>
     </view>
-    <view class="block">总成绩：<text class='large'>{{mark}}</text></view>
+    <view class="block">总成绩：
+    <text class='large'>{{mark}}</text>
+    </view>
   </view> 
   <view class='table'>
     <text>性别：</text>
     <radio-group class="radio-group" bindchange="radioChange1">
       <label class="radio" wx:for="{{items}}">
-       <radio class="radio" value="{{item.name}}" />{{item.value}}
+       <radio class="radio" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
       </label>
     </radio-group>
   </view>
@@ -19,16 +21,23 @@
     <text>年级：</text>
     <radio-group class="radio-group" bindchange="radioChange2">
       <label class="radio" wx:for="{{items2}}">
-        <radio class="radio" value="{{item.name}}" />{{item.value}}
+        <radio class="radio" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
       </label>
     </radio-group>
   </view >
   <view>
       <block wx:for="{{listData}}" wx:key="{{id}}">
-      <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="tr bg-g" wx:if="{{index % 2 == 0 && index!== 6}}">
         <view class="tdLeft">{{item.project}}</view>
         <view class="tdCenter"><input placeholder='请输入 ' data-name="{{item.id}}" bindinput="getInput" placeholder-style="font-size:smaller"></input></view>
         <view class="tdRight">{{item.unit}}</view>
+      </view>
+      <view class="tr bg-g" wx:elif="{{index == 6}}">
+        <view class="tdLeft">{{item.project}}</view>
+        <view class="tdCenter"><input placeholder='请输入 ' data-name="{{item.id1}}" bindinput="getInput" placeholder-style="font-size:smaller"></input></view>
+        <view class="tdRight">{{item.unit1}}</view>
+        <view class="tdCenter2"><input data-name="{{item.id2}}" bindinput="getInput" placeholder-style="font-size:smaller"></input></view>
+        <view class="tdRight">{{item.unit2}}</view>
       </view>
       <view class="tr" wx:else>
         <view class="tdLeft">{{item.project}}</view>
