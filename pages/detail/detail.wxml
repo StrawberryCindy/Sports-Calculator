@@ -1,4 +1,27 @@
 <!--pages/detail/detail.wxml-->
 <view>
-<canvas canvas-id="radarCanvas" disable-scroll="false" class="canvas"></canvas>
+  <canvas canvas-id="radarCanvas" disable-scroll="false" class="canvas"></canvas>
+  <view class='table'>
+    <view class='table_header'>
+      <view class="th" style='width:130rpx'>
+        <view class='centerclass cell_label'>指标</view>
+      </view>
+      <view wx:for="{{dateArray}}">
+        <view class='th'>
+          <view class="cell_label centerclass">{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+
+
+    <block wx:for="{{sch_listData}}">
+      <view class='table_main'>
+        <!--上午下午晚上  -->
+        <view class='td' style='width:130rpx;background-color:white;'>
+          <view class="cell_label centerclass">{{item.time_title}}</view>
+        </view>
+        </view>
+    </block>
+  </view>
 </view>

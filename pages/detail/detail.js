@@ -13,7 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    upC:null
+    upC:null,
+    dateArray: ['原始分','加权分','加分','评级' ]
   },
 
   /**
