@@ -7,6 +7,7 @@
     </view>
     <view class="block">总成绩：
     <text class='large'>{{mark}}</text>
+    <button class='btn' bindtap='logDetail'>详情</button>
     </view>
   </view> 
   <view class='table'>

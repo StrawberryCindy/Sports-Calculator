@@ -1,4 +1,16 @@
 /**index.wxss**/
+.btn{
+  background-color: rgb(197, 231, 247);
+  border: none;
+  font-size: smaller;
+  margin-top:-15px;
+  border-radius: 20rpx;
+  margin-left:110px; 
+  height: 21px;
+  line-height:15px;
+  padding:3px;
+}
+
 .top{
   background-color: #94DAED;
   display: flex;

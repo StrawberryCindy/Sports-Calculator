@@ -1,2 +1,4 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<view>
+<canvas canvas-id="radarCanvas" disable-scroll="false" class="canvas"></canvas>
+</view>

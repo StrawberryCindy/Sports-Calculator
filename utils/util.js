@@ -38,18 +38,15 @@ module.exports = {
 //计算BMI
 function dealBMI () {
   var bmi = 0
-  app.height = 0
-  app.weight = 0
-  console.log(app.height, typeof app.weight)
-  if (app.height && app.weight) {
-    console.log(app.height, app.weight)
-    bmi = (app.weight / Math.pow(app.height / 100, 2)).toFixed(1);
+  var height = app.globalData.height, weight = app.globalData.weight
+  if (height && weight) {
+    console.log(height, weight)
+    bmi = (weight / Math.pow(height / 100, 2)).toFixed(1);
   }
   return bmi;
 }
 //返回与BMI有关的中文和成绩
 function dealBMIMarkG (bmi) {
-  console.log(bmi);
   if (bmi == 0) return [0, '低体重'];
   var bmiMark = 0
   var bmiC = '低体重';
@@ -90,8 +87,9 @@ function dealBMIMarkB (bmi) {
 //返回女生肺活量成绩
 function dealLungCapicityG (n) {
   var lungMark = 0
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
+      console.log(n)
     case 2:
       if (n < 1800) {
         lungMark = 0
@@ -184,12 +182,13 @@ function dealLungCapicityG (n) {
       }
       break;
   }
+  console.log(lungMark)
   return lungMark;
 }
 //返回男生肺活量成绩
 function dealLungCapicityB (n) {
   var lungMark = 0
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < 2300) {
@@ -288,7 +287,7 @@ function dealLungCapicityB (n) {
 //返回坐位体前屈成绩
 function dealSitReachG (n) {
   var reachMark = 0;
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if(n < 2) reachMark = 0;
@@ -342,7 +341,7 @@ function dealSitReachG (n) {
 }
 function dealSitReachB (n) {
   var reachMark = 0;
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < -1.3) reachMark = 0;
@@ -397,7 +396,7 @@ function dealSitReachB (n) {
 //返回跳远成绩
 function dealJumpG (n) {
   var jumpMark = 0;
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < 126) jumpMark = 0;
@@ -452,7 +451,7 @@ function dealJumpG (n) {
 }
 function dealJumpB (n) {
   var jumpMark = 0;
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < 183) jumpMark = 0;
@@ -506,9 +505,9 @@ function dealJumpB (n) {
 }
 //返回短跑成绩
 function deal50G (n) {
-  if (n == 0) return 0;
   var shortRunMark = 0;
-  switch (app.grade) {
+  console.log(n)
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n > 11.3) shortRunMark = 0;
@@ -561,9 +560,8 @@ function deal50G (n) {
   return shortRunMark;
 }
 function deal50B (n) {
-  if (n == 0) return 0;
   var shortRunMark = 0;
-  switch (app.grade) {
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n > 10.1) shortRunMark = 0;
@@ -617,10 +615,10 @@ function deal50B (n) {
 }
 //返回男生1000m成绩
 function deal1000 (m,s) {
-  var longRunMark;
+  if( isNaN(s)) s=0
   var n = m * 60 + s;
-  if (n == 0) return 0;
-  switch (app.grade) {
+  var longRunMark = 0;
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n > 372) longRunMark = 0;
@@ -694,10 +692,10 @@ function deal1000 (m,s) {
 }
 //返回女生800m成绩
 function deal800 (m,s) {
-  var longRunMark;
+  if( isNaN(s)) s = 0
   var n = m * 60 + s;
-  if (n == 0) return 0;
-  switch (app.grade) {
+  var longRunMark = 0;
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n > 324) longRunMark = 0;
@@ -771,9 +769,8 @@ function deal800 (m,s) {
 }
 //返回引体向上成绩
 function dealPullUp (n) {
-  if (n == 0) return 0;
-  var upMark;
-  switch (app.grade) {
+  var upMark = 0;
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < 5) upMark = 0;
@@ -837,9 +834,8 @@ function dealPullUp (n) {
 }
 //返回仰卧起坐成绩
 function dealSitUp (n) {
-  if(n == 0) return 0;
-  var upMark;
-  switch (app.grade) {
+  var upMark = 0
+  switch (app.globalData.grade) {
     case 1:
     case 2:
       if (n < 16) upMark = 0;

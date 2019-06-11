@@ -1,10 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    var gender = 'boy'
-    var grade = 1
-    var height = 0, weight = 0
-
+    
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -38,6 +35,10 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    gender: 'boy',
+    grade: 1,
+    height: 0, weight: 0,
+    bmiMark: 0, lungMark: 0, reachMark: 0, jumpMark: 0, shortRunMark: 0, longRunMark: 0, upMark: 0
   }
 })
