@@ -5,6 +5,7 @@ const util = require('../../utils/util.js')
 var bmi = 0, bmiC = '低体重'
 var longRunMinute = 100, longRunSecond = 100
 var lungVolume = 0, reachPosition = -20, jump = 0, shortRun = 100, up = 0 
+
 Page({
   data: {
     bmi:['0'],
@@ -248,7 +249,7 @@ Page({
   },
   logDetail: function(options){
     wx.navigateTo({
-      url: '../detail/detail?upC=' + this.data.listData[7].project,
+      url: '../detail/detail?upC=' + this.data.listData[7].project + '&longRun=' + this.data.listData[6].project,
     })
   }
 })

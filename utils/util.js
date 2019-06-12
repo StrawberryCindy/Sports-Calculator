@@ -32,7 +32,15 @@ module.exports = {
   deal1000: deal1000,
   deal800: deal800,
   dealSitUp: dealSitUp,
-  dealPullUp: dealPullUp
+  dealPullUp: dealPullUp,
+  getLevel: getLevel,
+  initBmi: initBmi,
+  initLungMark: initLungMark,
+  initReachMark: initReachMark,
+  initJumpMark: initJumpMark,
+  initShortRunMark: initShortRunMark,
+  initLongRunMark: initLongRunMark,
+  initUpMark: initUpMark
 }
 
 //计算BMI
@@ -906,4 +914,71 @@ function dealSitUp (n) {
       break;
   }
   return upMark;
+}
+
+//返回评级
+function getLevel(n){
+  var level = ""
+
+  if (n >= 90) level = "优秀"
+  else if (n < 90 && n >= 80) level = "良好"
+  else if (n < 80 && n >= 60) level = "及格"
+  else if (n < 60) level = "不及格"
+
+  return level
+}
+//返回各指标原始分和评级(及个别加分项)
+function initBmi(){
+  var level = ""
+  var m = parseInt(app.globalData.bmiMark / 0.15)
+  level = getLevel(m)
+  return [m, level]
+} 
+function initLungMark(){
+  var level = ""
+  var m = parseInt(app.globalData.lungMark / 0.15)
+  level = getLevel(m)
+  return [m, level]
+}
+function initReachMark(){
+  var level = ""
+  var m = parseInt(app.globalData.reachMark * 10)
+  level = getLevel(m)
+  return [m, level]
+}
+function initJumpMark(){
+  var level =""
+  var m = parseInt(app.globalData.jumpMark * 10)
+  level = getLevel(m)
+  return [m, level]
+}
+function initShortRunMark(){
+  var level = ""
+  var m = parseInt(app.globalData.shortRunMark * 5)
+  level = getLevel(m)
+  return [m, level]
+}
+function initLongRunMark(){
+  var level = ""
+  var m , a
+  if (app.globalData.longRunMark > 20) {
+    m = 100
+    a = parseInt(app.globalData.longRunMark - 20)
+  } else {
+    m = parseInt(app.globalData.longRunMark * 5)
+  }
+  level = getLevel(m)
+  return [m, level, a]
+}
+function initUpMark(){
+  var level = ""
+  var m, a
+  if (app.globalData.upMark > 10) {
+    m = 100
+    a = parseInt(app.globalData.upMark - 10)
+  } else {
+    m = parseInt(app.globalData.upMark * 10)
+  }
+  level = getLevel(m)
+  return [m, level, a]
 }

@@ -11,13 +11,9 @@
   border-bottom: 0;  
 }
 
-.scrollClass {
-  display: flex;
-  width: 100%;
-  white-space: nowrap;
-  margin-top: 23px;
-  height: 100%;
-  background-color: white;
+.table_main {
+  display: inline-flex;
+  flex-direction: row;
 }
 
 .table_header {
@@ -26,10 +22,9 @@
 
 .th {
   display: flex;
-  flex-direction: column;
-  width: 150rpx;
+  width: 135rpx;
   height: 90rpx;
-  background: rgba(241, 252, 255, 1);
+  background: #E6F3F9;
   border-right: 1rpx solid rgba(218, 217, 217, 1); 
   border-bottom: 1rpx solid rgba(218, 217, 217, 1); 
   justify-content: center;
@@ -39,4 +34,17 @@
 .cell_label{
   font-size: 26rpx;
   color: rgba(74, 74, 74, 1);
+}
+
+.td {
+  display: flex;
+  flex-direction: column;
+  width: 135rpx;
+  height: 90rpx;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  border: 1rpx solid rgba(218, 217, 217, 1);
+  border-top: 0;
+  border-left:0; 
 }

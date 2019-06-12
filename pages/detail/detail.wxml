@@ -3,25 +3,25 @@
   <canvas canvas-id="radarCanvas" disable-scroll="false" class="canvas"></canvas>
   <view class='table'>
     <view class='table_header'>
-      <view class="th" style='width:130rpx'>
-        <view class='centerclass cell_label'>指标</view>
+      <view class="th" style='width:200rpx'>
+        <view class='cell_label'>指标</view>
       </view>
-      <view wx:for="{{dateArray}}">
+      <view wx:for="{{itemArray}}">
         <view class='th'>
-          <view class="cell_label centerclass">{{item}}</view>
+          <view class="cell_label">{{item}}</view>
         </view>
       </view>
     </view>
-
-
-
-    <block wx:for="{{sch_listData}}">
+    <block wx:for="{{listData}}">
       <view class='table_main'>
-        <!--上午下午晚上  -->
-        <view class='td' style='width:130rpx;background-color:white;'>
-          <view class="cell_label centerclass">{{item.time_title}}</view>
+        <view class='td' style='width:200rpx'>
+          <view class="cell_label">{{item.title}}</view>
         </view>
-        </view>
+        <view class="cell_label td">{{item.iMark}}</view>
+        <view class="cell_label td">{{item.mark}}</view>
+        <view class="cell_label td">{{item.aMark}}</view>
+        <view class="cell_label td">{{item.level}}</view>
+      </view>
     </block>
   </view>
 </view>
