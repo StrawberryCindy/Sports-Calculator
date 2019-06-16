@@ -35,8 +35,8 @@ Page({
   //性别判定 重新计算
   radioChange1: function (e) {
     console.log(e);
-    app.gender = e.detail.value;
-    if (app.gender == 'girl') {
+    app.globalData.gender = e.detail.value;
+    if (app.globalData.gender == 'girl') {
       this.setData({
         'listData[6].project': "800米跑",
         'listData[7].project': "仰卧起坐"
@@ -75,8 +75,8 @@ Page({
   },
   //获取年级 重新计算
   radioChange2: function (e) {
-    app.grade = parseInt(e.detail.value);
-    if (app.gender == 'girl') {
+    app.globalData.grade = parseInt(e.detail.value);
+    if (app.globalData.gender == 'girl') {
       bmi = util.dealBMI()
       util.dealBMIMarkG(bmi)[0]
       bmiC = util.dealBMIMarkG(bmi)[1]

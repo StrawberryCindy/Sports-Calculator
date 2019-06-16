@@ -199,6 +199,8 @@ function dealLungCapicityB (n) {
   switch (app.globalData.grade) {
     case 1:
     case 2:
+    console.log(app.globalData.grade)
+      console.log(n)
       if (n < 2300) {
         lungMark = 0       
       } else if (n >= 2300 && n < 2460) {
@@ -960,7 +962,7 @@ function initShortRunMark(){
 }
 function initLongRunMark(){
   var level = ""
-  var m , a
+  var m , a='-'
   if (app.globalData.longRunMark > 20) {
     m = 100
     a = parseInt(app.globalData.longRunMark - 20)
@@ -972,7 +974,7 @@ function initLongRunMark(){
 }
 function initUpMark(){
   var level = ""
-  var m, a
+  var m, a='-'
   if (app.globalData.upMark > 10) {
     m = 100
     a = parseInt(app.globalData.upMark - 10)

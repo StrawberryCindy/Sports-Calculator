@@ -31,6 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     //换算原始分
     bmiMark = util.initBmi()[0]
     lungMark = util.initLungMark()[0]
@@ -44,19 +45,22 @@ Page({
     var level = [util.initBmi()[1], util.initLungMark()[1], util.initReachMark()[1], util.initJumpMark()[1], util.initShortRunMark()[1], util.initLongRunMark()[1], util.initUpMark()[1]]
     var aMark = [util.initLongRunMark()[2], util.initUpMark()[2]]
 
+    //表单数据赋值
+    var listData = [
+      { title: '身体质量指数', iMark: bmiMark, mark: 0, aMark: '-', level: level[0] },
+      { title: '肺活量', iMark: lungMark, mark: 0, aMark: '-', level: level[1] },
+      { title: '坐位体前屈', iMark: reachMark, mark: 0, aMark: '-', level: level[2] },
+      { title: '立定跳远', iMark: jumpMark, mark: 0, aMark: '-', level: level[3] },
+      { title: '50米跑', iMark: shortRunMark, mark: 0, aMark: '-', level: level[4] },
+      { title: options.longRun, iMark: longRunMark, mark: 0, aMark: aMark[0], level: level[5] },
+      { title: options.upC, iMark: upMark, mark: 0, aMark: aMark[1], level: level[6] },
+    ]
+
     //页面显示
     this.setData({
       imageWidth: wx.getSystemInfoSync().windowWidth,
       upC: options.upC,
-      'listData[5].title': options.longRun,
-      'listData[6].title': options.upC,
-      'listData[0].iMark': bmiMark,
-      'listData[1].iMark': lungMark,
-      'listData[2].iMark': reachMark,
-      'listData[3].iMark': jumpMark,
-      'listData[4].iMark': shortRunMark,
-      'listData[5].iMark': longRunMark,
-      'listData[6].iMark': upMark,
+      listData:listData,
       'listData[0].mark': app.globalData.bmiMark,
       'listData[1].mark': app.globalData.lungMark,
       'listData[2].mark': app.globalData.reachMark,
@@ -64,15 +68,7 @@ Page({
       'listData[4].mark': app.globalData.shortRunMark,
       'listData[5].mark': app.globalData.longRunMark,
       'listData[6].mark': app.globalData.upMark,
-      'listData[5].aMark': aMark[0],
-      'listData[6].aMark': aMark[1],
-      'listData[0].level': level[0],
-      'listData[1].level': level[1],
-      'listData[2].level': level[2],
-      'listData[3].level': level[3],
-      'listData[4].level': level[4],
-      'listData[5].level': level[5],
-      'listData[6].level': level[6]
+
     });
 
     //计算屏幕宽度比列
