@@ -13,7 +13,7 @@
   <view class='table'>
     <text>性别：</text>
     <radio-group class="radio-group" bindchange="radioChange1">
-      <label class="radio" wx:for="{{items}}">
+      <label class="radio" wx:for="{{genders}}" wx:key=''>
        <radio class="radio" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
       </label>
     </radio-group>
@@ -21,7 +21,7 @@
   <view class='table'>
     <text>年级：</text>
     <radio-group class="radio-group" bindchange="radioChange2">
-      <label class="radio" wx:for="{{items2}}">
+      <label class="radio" wx:for="{{grades}}" wx:key=''>
         <radio class="radio" value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
       </label>
     </radio-group>

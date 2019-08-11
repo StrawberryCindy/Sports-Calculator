@@ -1,6 +1,6 @@
 // pages/detail/detail.js
 const app = getApp()
-const util = require('../../utils/util.js')
+const util = require('../../../utils/util.js')
 //首先引入wxcharts.js插件
 var wxCharts = require("wxcharts-min.js");
 //定义记录初始屏幕宽度比例，便于初始化
@@ -31,19 +31,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    //换算原始分
-    bmiMark = util.initBmi()[0]
-    lungMark = util.initLungMark()[0]
-    reachMark = util.initReachMark()[0]
-    jumpMark = util.initJumpMark()[0]
-    shortRunMark = util.initShortRunMark()[0]
-    longRunMark = util.initLongRunMark()[0]
-    upMark = util.initUpMark()[0]
-    
+    var marks = JSON.parse(options.markArray)
+    console.log(marks)
+    //换算原始分 将换算成绩列为数组 bmiMark,lungMark,reachMark,jumpMark,shortRunMark,longRunMark,upMark
+    bmiMark = util.initBmi(marks[0])[0]
+    lungMark = util.initLungMark(marks[1])[0]
+    reachMark = util.initReachMark(marks[2])[0]
+    jumpMark = util.initJumpMark(marks[3])[0]
+    shortRunMark = util.initShortRunMark(marks[4])[0]
+    longRunMark = util.initLongRunMark(marks[5])[0]
+    upMark = util.initUpMark(marks[6])[0]
+    console.log(bmiMark, lungMark, reachMark, jumpMark, shortRunMark, longRunMark, upMark)
     //评级和加分
-    var level = [util.initBmi()[1], util.initLungMark()[1], util.initReachMark()[1], util.initJumpMark()[1], util.initShortRunMark()[1], util.initLongRunMark()[1], util.initUpMark()[1]]
-    var aMark = [util.initLongRunMark()[2], util.initUpMark()[2]]
+    var level = [util.initBmi(marks[0])[1], util.initLungMark(marks[1])[1], util.initReachMark(marks[2])[1], util.initJumpMark(marks[3])[1], util.initShortRunMark(marks[4])[1], util.initLongRunMark(marks[5])[1], util.initUpMark(marks[6])[1]]
+    var aMark = [util.initLongRunMark(marks[5])[2], util.initUpMark(marks[6])[2]]
 
     //表单数据赋值
     var listData = [
@@ -61,19 +62,18 @@ Page({
       imageWidth: wx.getSystemInfoSync().windowWidth,
       upC: options.upC,
       listData:listData,
-      'listData[0].mark': app.globalData.bmiMark,
-      'listData[1].mark': app.globalData.lungMark,
-      'listData[2].mark': app.globalData.reachMark,
-      'listData[3].mark': app.globalData.jumpMark,
-      'listData[4].mark': app.globalData.shortRunMark,
-      'listData[5].mark': app.globalData.longRunMark,
-      'listData[6].mark': app.globalData.upMark,
+      'listData[0].mark': marks[0].toFixed(1),
+      'listData[1].mark': marks[1].toFixed(1),
+      'listData[2].mark': marks[2].toFixed(1),
+      'listData[3].mark': marks[3].toFixed(1),
+      'listData[4].mark': marks[4].toFixed(1),
+      'listData[5].mark': marks[5].toFixed(1),
+      'listData[6].mark': marks[6].toFixed(1),
 
     });
 
     //计算屏幕宽度比列
     windowW = this.data.imageWidth / 375;
-    console.log(windowW);
   },
 
   /**

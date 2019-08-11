@@ -35,10 +35,6 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
-    gender: 'boy',
-    grade: 1,
-    height: 0, weight: 0,
-    bmiMark: 0, lungMark: 0, reachMark: 0, jumpMark: 0, shortRunMark: 0, longRunMark: 0, upMark: 0
+    userInfo: null
   }
 })

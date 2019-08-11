@@ -42,11 +42,13 @@ module.exports = {
   initLongRunMark: initLongRunMark,
   initUpMark: initUpMark
 }
-
+/**
+ * 以下返回的成绩都是带权重的成绩
+ */
 //计算BMI
-function dealBMI () {
+function dealBMI (h, w) {
   var bmi = 0
-  var height = app.globalData.height, weight = app.globalData.weight
+  var height = h, weight = w
   if (height && weight) {
     console.log(height, weight)
     bmi = (weight / Math.pow(height / 100, 2)).toFixed(1);
@@ -93,11 +95,10 @@ function dealBMIMarkB (bmi) {
   return [bmiMark, bmiC]
 }
 //返回女生肺活量成绩
-function dealLungCapicityG (n) {
+function dealLungCapicityG (n, grade) {
   var lungMark = 0
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
-      console.log(n)
     case 2:
       if (n < 1800) {
         lungMark = 0
@@ -194,12 +195,12 @@ function dealLungCapicityG (n) {
   return lungMark;
 }
 //返回男生肺活量成绩
-function dealLungCapicityB (n) {
+function dealLungCapicityB (n, grade) {
   var lungMark = 0
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
-    console.log(app.globalData.grade)
+    console.log(grade)
       console.log(n)
       if (n < 2300) {
         lungMark = 0       
@@ -295,9 +296,9 @@ function dealLungCapicityB (n) {
   return lungMark;
 }
 //返回坐位体前屈成绩
-function dealSitReachG (n) {
+function dealSitReachG (n, grade) {
   var reachMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if(n < 2) reachMark = 0;
@@ -349,9 +350,9 @@ function dealSitReachG (n) {
   }
   return reachMark;
 }
-function dealSitReachB (n) {
+function dealSitReachB (n, grade) {
   var reachMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n < -1.3) reachMark = 0;
@@ -404,9 +405,9 @@ function dealSitReachB (n) {
   return reachMark;
 }
 //返回跳远成绩
-function dealJumpG (n) {
+function dealJumpG (n, grade) {
   var jumpMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n < 126) jumpMark = 0;
@@ -459,9 +460,9 @@ function dealJumpG (n) {
   }
   return jumpMark;
 }
-function dealJumpB (n) {
+function dealJumpB (n, grade) {
   var jumpMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n < 183) jumpMark = 0;
@@ -514,10 +515,10 @@ function dealJumpB (n) {
   return jumpMark;
 }
 //返回短跑成绩
-function deal50G (n) {
+function deal50G (n, grade) {
   var shortRunMark = 0;
   console.log(n)
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n > 11.3) shortRunMark = 0;
@@ -569,9 +570,9 @@ function deal50G (n) {
   }
   return shortRunMark;
 }
-function deal50B (n) {
+function deal50B (n, grade) {
   var shortRunMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n > 10.1) shortRunMark = 0;
@@ -624,11 +625,11 @@ function deal50B (n) {
   return shortRunMark;
 }
 //返回男生1000m成绩
-function deal1000 (m,s) {
+function deal1000 (m,s, grade) {
   if( isNaN(s)) s=0
   var n = m * 60 + s;
   var longRunMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n > 372) longRunMark = 0;
@@ -701,11 +702,11 @@ function deal1000 (m,s) {
   return longRunMark;
 }
 //返回女生800m成绩
-function deal800 (m,s) {
+function deal800 (m,s, grade) {
   if( isNaN(s)) s = 0
   var n = m * 60 + s;
   var longRunMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n > 324) longRunMark = 0;
@@ -778,9 +779,9 @@ function deal800 (m,s) {
   return longRunMark;
 }
 //返回引体向上成绩
-function dealPullUp (n) {
+function dealPullUp (n, grade) {
   var upMark = 0;
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n < 5) upMark = 0;
@@ -843,9 +844,9 @@ function dealPullUp (n) {
   return upMark;
 }
 //返回仰卧起坐成绩
-function dealSitUp (n) {
+function dealSitUp (n, grade) {
   var upMark = 0
-  switch (app.globalData.grade) {
+  switch (grade) {
     case 1:
     case 2:
       if (n < 16) upMark = 0;
@@ -921,65 +922,67 @@ function dealSitUp (n) {
 //返回评级
 function getLevel(n){
   var level = ""
-
   if (n >= 90) level = "优秀"
   else if (n < 90 && n >= 80) level = "良好"
   else if (n < 80 && n >= 60) level = "及格"
   else if (n < 60) level = "不及格"
-
   return level
 }
-//返回各指标原始分和评级(及个别加分项)
-function initBmi(){
+
+/**
+ * 返回各指标原始分（不带权重）和评级(及个别加分项)，参数为带权重的分数
+*/
+function initBmi(bmiMark){
   var level = ""
-  var m = parseInt(app.globalData.bmiMark / 0.15)
+  var m = parseInt(bmiMark / 0.15)
   level = getLevel(m)
   return [m, level]
 } 
-function initLungMark(){
+function initLungMark(lungMark){
   var level = ""
-  var m = parseInt(app.globalData.lungMark / 0.15)
+  console.log(lungMark)
+  var m = parseInt(lungMark / 0.15)
   level = getLevel(m)
   return [m, level]
 }
-function initReachMark(){
+function initReachMark(reachMark){
   var level = ""
-  var m = parseInt(app.globalData.reachMark * 10)
+  var m = parseInt(reachMark * 10)
   level = getLevel(m)
   return [m, level]
 }
-function initJumpMark(){
+function initJumpMark(jumpMark){
   var level =""
-  var m = parseInt(app.globalData.jumpMark * 10)
+  var m = parseInt(jumpMark * 10)
   level = getLevel(m)
   return [m, level]
 }
-function initShortRunMark(){
+function initShortRunMark(shortRunMark){
   var level = ""
-  var m = parseInt(app.globalData.shortRunMark * 5)
+  var m = parseInt(shortRunMark * 5)
   level = getLevel(m)
   return [m, level]
 }
-function initLongRunMark(){
+function initLongRunMark(longRunMark){
   var level = ""
   var m , a='-'
-  if (app.globalData.longRunMark > 20) {
+  if (longRunMark > 20) {
     m = 100
-    a = parseInt(app.globalData.longRunMark - 20)
+    a = parseInt(longRunMark - 20)
   } else {
-    m = parseInt(app.globalData.longRunMark * 5)
+    m = parseInt(longRunMark * 5)
   }
   level = getLevel(m)
   return [m, level, a]
 }
-function initUpMark(){
+function initUpMark(upMark){
   var level = ""
   var m, a='-'
-  if (app.globalData.upMark > 10) {
+  if (upMark > 10) {
     m = 100
-    a = parseInt(app.globalData.upMark - 10)
+    a = parseInt(upMark - 10)
   } else {
-    m = parseInt(app.globalData.upMark * 10)
+    m = parseInt(upMark * 10)
   }
   level = getLevel(m)
   return [m, level, a]

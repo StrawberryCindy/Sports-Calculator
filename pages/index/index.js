@@ -2,20 +2,25 @@
 //获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
+//初始成绩
 var bmi = 0, bmiC = '低体重'
 var longRunMinute = 100, longRunSecond = 100
 var lungVolume = 0, reachPosition = -20, jump = 0, shortRun = 100, up = 0 
+//换算成绩初始化
+var gender= 'boy', grade= 1, height= 0, weight= 0
+//将换算成绩列为数组 bmiMark,lungMark,reachMark,jumpMark,shortRunMark,longRunMark,upMark
+var marks = [0,0,0,0,0,0,0]
 
 Page({
   data: {
     bmi:['0'],
     bmiC:['低体重'],
     mark:['0.0'],
-    items: [
+    genders: [
       { name: 'boy', value: '男', checked:"true"},
       { name: 'girl', value: '女' }
     ],
-    items2: [
+    grades: [
       { name: '1', value: '大一', checked: "true" },
       { name: '2', value: '大二' },
       { name: '3', value: '大三' },
@@ -35,73 +40,73 @@ Page({
   //性别判定 重新计算
   radioChange1: function (e) {
     console.log(e);
-    app.globalData.gender = e.detail.value;
-    if (app.globalData.gender == 'girl') {
+    gender = e.detail.value;
+    if (gender == 'girl') {
       this.setData({
         'listData[6].project': "800米跑",
         'listData[7].project': "仰卧起坐"
       })
-      bmi = util.dealBMI()
-      app.globalData.bmiMark = util.dealBMIMarkG(bmi)[0]
+      bmi = util.dealBMI(height,weight)
+      marks[0] = util.dealBMIMarkG(bmi)[0]
       bmiC = util.dealBMIMarkG(bmi)[1]
-      app.globalData.lungMark = util.dealLungCapicityG(lungVolume);
-      app.globalData.reachMark = util.dealSitReachG(reachPosition);
-      app.globalData.jumpMark = util.dealJumpG(jump);
-      app.globalData.shortRunMark = util.deal50G(shortRun);
-      app.globalData.longRunMark = util.deal800(longRunMinute, longRunSecond);
-      app.globalData.upMark = util.dealSitUp(up);
+      marks[1] = util.dealLungCapicityG(lungVolume, grade);
+      marks[2] = util.dealSitReachG(reachPosition, grade);
+      marks[3] = util.dealJumpG(jump, grade);
+      marks[4] = util.deal50G(shortRun, grade);
+      marks[5] = util.deal800(longRunMinute, longRunSecond,grade);
+      marks[6] = util.dealSitUp(up, grade);
     } else {
       this.setData({
         'listData[6].project': "1000米跑",
         'listData[7].project': "引体向上"
       })
-      bmi = util.dealBMI()
-      app.globalData.bmiMark = util.dealBMIMarkB(bmi)[0]
+      bmi = util.dealBMI(height, weight)
+      marks[0] = util.dealBMIMarkB(bmi)[0]
       bmiC = util.dealBMIMarkB(bmi)[1]
-      app.globalData.lungMark = util.dealLungCapicityB(lungVolume);
-      app.globalData.reachMark = util.dealSitReachB(reachPosition);
-      app.globalData.jumpMark = util.dealJumpB(jump);
-      app.globalData.shortRunMark = util.deal50B(shortRun);
-      app.globalData.longRunMark = util.deal1000(longRunMinute, longRunSecond);
-      app.globalData.upMark = util.dealPullUp(up);
+      marks[1] = util.dealLungCapicityB(lungVolume, grade);
+      marks[2] = util.dealSitReachB(reachPosition, grade);
+      marks[3] = util.dealJumpB(jump, grade);
+      marks[4] = util.deal50B(shortRun, grade);
+      marks[5] = util.deal1000(longRunMinute, longRunSecond,grade);
+      marks[6] = util.dealPullUp(up, grade);
      
     }
-    console.log(bmi, app.globalData.bmiMark, bmiC, app.globalData.lungMark, app.globalData.reachMark, app.globalData.jumpMark, app.globalData.shortRunMark, app.globalData.longRunMark, app.globalData.upMark)
+    console.log(bmi, marks[0], bmiC, marks[1], marks[2], marks[3], marks[4], marks[5], marks[6])
     this.setData({
       bmi: bmi,
       bmiC: bmiC,
-      mark: (app.globalData.bmiMark + app.globalData.lungMark + app.globalData.reachMark + app.globalData.jumpMark + app.globalData.shortRunMark + app.globalData.longRunMark + app.globalData.upMark).toFixed(1)
+      mark: (marks[0] + marks[1] + marks[2] + marks[3] + marks[4] + marks[5] + marks[6]).toFixed(1)
     })
   },
   //获取年级 重新计算
   radioChange2: function (e) {
-    app.globalData.grade = parseInt(e.detail.value);
-    if (app.globalData.gender == 'girl') {
-      bmi = util.dealBMI()
+    grade = parseInt(e.detail.value);
+    if (gender == 'girl') {
+      bmi = util.dealBMI(height, weight)
       util.dealBMIMarkG(bmi)[0]
       bmiC = util.dealBMIMarkG(bmi)[1]
-      app.globalData.lungMark = util.dealLungCapicityG(lungVolume);
-      app.globalData.reachMark = util.dealSitReachG(reachPosition);
-      app.globalData.jumpMark = util.dealJumpG(jump);
-      app.globalData.shortRunMark = util.deal50G(shortRun);
-      app.globalData.longRunMark = util.deal800(longRunMinute, longRunSecond);
-      app.globalData.upMark = util.dealSitUp(up);
+      marks[1] = util.dealLungCapicityG(lungVolume, grade);
+      marks[2] = util.dealSitReachG(reachPosition, grade);
+      marks[3] = util.dealJumpG(jump, grade);
+      marks[4] = util.deal50G(shortRun, grade);
+      marks[5] = util.deal800(longRunMinute, longRunSecond,grade);
+      marks[6] = util.dealSitUp(up, grade);
     } else {
-      bmi = util.dealBMI()
-      app.globalData.bmiMark = util.dealBMIMarkB(bmi)[0]
+      bmi = util.dealBMI(height, weight)
+      marks[0] = util.dealBMIMarkB(bmi)[0]
       bmiC = util.dealBMIMarkB(bmi)[1]
-      app.globalData.lungMark = util.dealLungCapicityB(lungVolume);
-      app.globalData.reachMark = util.dealSitReachB(reachPosition);
-      app.globalData.jumpMark = util.dealJumpB(jump);
-      app.globalData.shortRunMark = util.deal50B(shortRun);
-      app.globalData.longRunMark = util.deal1000(longRunMinute, longRunSecond);
-      app.globalData.upMark = util.dealPullUp(up);
+      marks[1] = util.dealLungCapicityB(lungVolume, grade);
+      marks[2] = util.dealSitReachB(reachPosition, grade);
+      marks[3] = util.dealJumpB(jump, grade);
+      marks[4] = util.deal50B(shortRun, grade);
+      marks[5] = util.deal1000(longRunMinute, longRunSecond,grade);
+      marks[6] = util.dealPullUp(up, grade);
     }
-    console.log(bmi, app.globalData.bmiMark, bmiC, app.globalData.lungMark, app.globalData.reachMark, app.globalData.jumpMark, app.globalData.shortRunMark, app.globalData.longRunMark, app.globalData.upMark)
+    console.log(bmi, marks[0], bmiC, marks[1], marks[2], marks[3], marks[4], marks[5], marks[6])
     this.setData({
       bmi: bmi,
       bmiC: bmiC,
-      mark: (app.globalData.bmiMark + app.globalData.lungMark + app.globalData.reachMark + app.globalData.jumpMark + app.globalData.shortRunMark + app.globalData.longRunMark + app.globalData.upMark).toFixed(1)
+      mark: (marks[0] + marks[1] + marks[2] + marks[3] + marks[4] + marks[5] + marks[6]).toFixed(1)
     })
   },
   //事件处理函数(原程序自带)
@@ -110,7 +115,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+   /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -138,118 +146,162 @@ Page({
       })
     }
   },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  }, 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+ 
   //获取当前用户输入的指标信息,并动态改变页面内容
   getInput: function (e) {
     console.log(e);
     let x = e.currentTarget.dataset.name;
-    if (app.gender == 'girl') {
+    if (gender == 'girl') {
       switch (x) {
         case 1:
-          app.globalData.height = parseInt (e.detail.value);
-          bmi = util.dealBMI()
-          app.globalData.bmiMark = util.dealBMIMarkG(bmi)[0]
+          height = parseInt (e.detail.value)
+          bmi = util.dealBMI(height, weight)
+          marks[0] = util.dealBMIMarkG(bmi)[0]
           bmiC = util.dealBMIMarkG(bmi)[1]
-          console.log(app.globalData.bmiMark)
+          console.log(marks[0])
           break;
         case 2:
-          app.globalData.weight = parseInt (e.detail.value)
-          bmi = util.dealBMI ()
-          app.globalData.bmiMark = util.dealBMIMarkG (bmi)[0]
+          weight = parseInt (e.detail.value)
+          bmi = util.dealBMI(height, weight)
+          marks[0] = util.dealBMIMarkG (bmi)[0]
           bmiC = util.dealBMIMarkG (bmi)[1]
           break;
         case 3:
           lungVolume = parseInt(e.detail.value);
-          app.globalData.lungMark = util.dealLungCapicityG (lungVolume);
-
+          marks[1] = util.dealLungCapicityG (lungVolume, grade);
           break;
         case 4:
           reachPosition = parseInt(e.detail.value);
-          app.globalData.reachMark = util.dealSitReachG (reachPosition);
+          marks[2] = util.dealSitReachG (reachPosition, grade);
           break;
         case 5:
           jump = parseInt(e.detail.value);
-          app.globalData.jumpMark = util.dealJumpG (jump);
+          marks[3] = util.dealJumpG (jump, grade);
           break;
         case 6:
           shortRun = parseInt(e.detail.value);
-          app.globalData.shortRunMark = util.deal50G (shortRun);
+          marks[4] = util.deal50G (shortRun, grade);
           break;
         case 7:
           longRunMinute = parseInt(e.detail.value);
-          app.globalData.longRunMark = util.deal800(longRunMinute, longRunSecond);
+          marks[5] = util.deal800(longRunMinute, longRunSecond,grade);
           break;
         case 8:
           longRunSecond = parseInt(e.detail.value);
-          app.globalData.longRunMark = util.deal800(longRunMinute, longRunSecond);
+          marks[5] = util.deal800(longRunMinute, longRunSecond,grade);
           break;
         case 9:
           up = parseInt(e.detail.value);
-          app.globalData.upMark = util.dealSitUp(up);
+          marks[6] = util.dealSitUp(up, grade);
           break;
       }
     } else {
       switch (x) {
         case 1:
-          app.globalData.height = parseInt (e.detail.value);
-          bmi = util.dealBMI()
-          app.globalData.bmiMark = util.dealBMIMarkB (bmi)[0]
+          height = parseInt (e.detail.value)
+          bmi = util.dealBMI(height, weight)
+          console.log(bmi)
+          marks[0] = util.dealBMIMarkB (bmi)[0]
           bmiC = util.dealBMIMarkB (bmi)[1]
           break;
         case 2:
-          app.globalData.weight = parseInt (e.detail.value)
-          bmi = util.dealBMI ()
-          app.globalData.bmiMark = util.dealBMIMarkB (bmi)[0]
+          weight = parseInt (e.detail.value)
+          bmi = util.dealBMI(height, weight)
+          marks[0] = util.dealBMIMarkB (bmi)[0]
           bmiC = util.dealBMIMarkB (bmi)[1]
           break;
         case 3:
           lungVolume = parseInt(e.detail.value);
-          app.globalData.lungMark = util.dealLungCapicityB(lungVolume);
-          console.log(app.globalData.lungMark)
+          marks[1] = util.dealLungCapicityB(lungVolume, grade);
+          console.log(marks[1])
           break;
         case 4:
           reachPosition = parseInt(e.detail.value);
-          app.globalData.reachMark = util.dealSitReachB(reachPosition);
+          marks[2] = util.dealSitReachB(reachPosition, grade);
           break;
         case 5:
           jump = parseInt(e.detail.value);
-          app.globalData.jumpMark = util.dealJumpB(jump);
+          marks[3] = util.dealJumpB(jump, grade);
           break;
         case 6:
           shortRun = parseInt(e.detail.value);
-          app.globalData.shortRunMark = util.deal50B(shortRun);
+          marks[4] = util.deal50B(shortRun, grade);
           break;
         case 7:
           longRunMinute = parseInt(e.detail.value);
-          app.globalData.longRunMark = util.deal1000(longRunMinute, longRunSecond);
+          marks[5] = util.deal1000(longRunMinute, longRunSecond,grade);
           break;
         case 8:
           longRunSecond = parseInt(e.detail.value);
-          app.globalData.longRunMark = util.deal1000(longRunMinute, longRunSecond);
+          marks[5] = util.deal1000(longRunMinute, longRunSecond,grade);
           break;
         case 9:
           up = parseInt(e.detail.value);
-          app.globalData.upMark = util.dealPullUp(up);
+          marks[6] = util.dealPullUp(up, grade);
           break;
       }
     }
-    console.log(bmi, app.globalData.bmiMark, bmiC, app.globalData.lungMark, app.globalData.reachMark, app.globalData.jumpMark, app.globalData.shortRunMark, app.globalData.longRunMark, app.globalData.upMark)
+    console.log(bmi, marks[0], bmiC, marks[1], marks[2], marks[3], marks[4], marks[5], marks[6])
     this.setData ({
       bmi: bmi,
       bmiC : bmiC,
-      mark: (app.globalData.bmiMark + app.globalData.lungMark + app.globalData.reachMark + app.globalData.jumpMark + app.globalData.shortRunMark + app.globalData.longRunMark + app.globalData.upMark).toFixed(1)
+      mark: (marks[0] + marks[1] + marks[2] + marks[3] + marks[4] + marks[5] + marks[6]).toFixed(1)
     })
   },
+  /**
+   * 页面跳转
+   */
   logDetail: function(options){
+    var markArray = JSON.stringify(marks)
     wx.navigateTo({
-      url: '../detail/detail?upC=' + this.data.listData[7].project + '&longRun=' + this.data.listData[6].project,
+      url: 'detail/detail?upC=' + this.data.listData[7].project + '&longRun=' + this.data.listData[6].project + '&markArray=' + markArray,
     })
   }
 })

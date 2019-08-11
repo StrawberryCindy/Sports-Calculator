@@ -6,13 +6,13 @@
       <view class="th" style='width:200rpx'>
         <view class='cell_label'>指标</view>
       </view>
-      <view wx:for="{{itemArray}}">
+      <view wx:for="{{itemArray}}" wx:key=''>
         <view class='th'>
           <view class="cell_label">{{item}}</view>
         </view>
       </view>
     </view>
-    <block wx:for="{{listData}}">
+    <block wx:for="{{listData}}" wx:key=''>
       <view class='table_main'>
         <view class='td' style='width:200rpx'>
           <view class="cell_label">{{item.title}}</view>

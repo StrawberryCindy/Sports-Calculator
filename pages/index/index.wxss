@@ -37,7 +37,7 @@
 .table{
   display: flex;
   flex-direction: row;
-  line-height: 70rpx;
+  line-height: 90rpx;
   margin-left: 7%;
   margin-bottom: 12rpx;
 }
@@ -62,14 +62,13 @@ radio .wx-radio-input{
  /* radio选中时样式 */ 
 radio .wx-radio-input.wx-radio-input-checked::before{
   border-radius: 20rpx; 
-  background-color:rgba(155, 153, 153, 0.856); 
 }
 
 .tr {
   display: flex;
   margin-left:7.5%;
   width: 85%;
-  height: 2.5rem;
+  height: 2.7rem;
   align-items: center;
 }
 
